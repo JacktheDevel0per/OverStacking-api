@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.inventory.Inventories;
@@ -24,19 +25,24 @@ public class ClearCommandBugFixin {
 		StaccGlobals.COUNT.set(0L);
 	}
 
-	@ModifyArg (method = "execute",
-			at = @At (value = "INVOKE", target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"),
+	@ModifyArg(
+			method = {"method_51939", "method_51938", "method_51937", "method_51936"},
+			at = @At(value = "INVOKE",
+					target = "Lnet/minecraft/text/Text;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/text/MutableText;"
+			),
 			index = 1)
 	private static Object[] exec(Object[] arr) {
 		arr[0] = StaccGlobals.COUNT.get();
 		return arr;
 	}
 
+
+
 	@Mixin (Inventories.class)
 	private static class InventoriesFixin {
 		@Inject (method = "remove(Lnet/minecraft/item/ItemStack;Ljava/util/function/Predicate;IZ)I",
-				at = @At (value = "RETURN"),
-				cancellable = true)
+				at = @At (value = "RETURN")
+		)
 		private static void total(ItemStack itemStack,
 				Predicate<ItemStack> predicate,
 				int i,

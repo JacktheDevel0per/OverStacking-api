@@ -10,7 +10,7 @@ public final class StaccGlobals {
 
 	private StaccGlobals() {}
 
-	// ideally this would use a callback, but I am lazy
+	// ideally this would use a callback, but I am lazy - Dev of Stacc
 	public static int getMax() {
 		Registry<Item> items = Registries.ITEM;
 		int size = items.getIds().size(), max;

@@ -1,4 +1,4 @@
-# Stacc
+# OverStacking api (fork of Stacc)
 Infinite* item stacking for fabric. \
 https://www.curseforge.com/minecraft/mc-mods/stacc-api \
 https://modrinth.com/mod/stacc-api
@@ -28,7 +28,7 @@ gradle:
 ```groovy
 repositories {
     maven {
-        url = uri("https://maven.ueaj.dev")
+        url = uri("https://ueaj.dev/maven")
         // for versions lower than 1.2.0
         // url = uri("https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/")
     }

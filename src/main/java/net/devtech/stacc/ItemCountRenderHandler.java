@@ -3,7 +3,7 @@ package net.devtech.stacc;
 import org.apache.commons.lang3.Validate;
 
 public class ItemCountRenderHandler {
-	private static ItemCountRenderHandler instance = new ItemCountRenderHandler();
+	private static ItemCountRenderHandler INSTANCE = new ItemCountRenderHandler();
 
 	private static final char[] POWER = {
 			'K',
@@ -43,15 +43,15 @@ public class ItemCountRenderHandler {
 
 
 	public static ItemCountRenderHandler getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	/**
 	 * mods can extend this class and set the instance.
 	 * There can only really be one handler, so it overrides any others.
 	 */
-	public static void setInstance(ItemCountRenderHandler instance) {
-		Validate.notNull(instance, "instance cannot be null");
-		ItemCountRenderHandler.instance = instance;
+	public static void setInstance(ItemCountRenderHandler INSTANCE) {
+		Validate.notNull(INSTANCE, "instance cannot be null");
+		ItemCountRenderHandler.INSTANCE = INSTANCE;
 	}
 }

@@ -12,7 +12,7 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
  */
 @Mixin (ServerPlayNetworkHandler.class)
 public class CreativeDesyncFixin {
-	@ModifyConstant (method = "onCreativeInventoryAction", constant = @Constant (intValue = 64))
+	@ModifyConstant(method = "onCreativeInventoryAction", constant = @Constant (intValue = 64))
 	private int max(int old) {
 		return StaccGlobals.getMax();
 	}

@@ -16,6 +16,11 @@ import net.minecraft.network.PacketByteBuf;
  */
 @Mixin (PacketByteBuf.class)
 public abstract class DesyncFixin {
+
+
+	@Shadow public abstract ByteBuf writeInt(int i);
+	@Shadow public abstract int readInt();
+
 	@Inject (method = "writeItemStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/network/PacketByteBuf;",
 			at = @At (value = "INVOKE",
 					target =
@@ -24,8 +29,7 @@ public abstract class DesyncFixin {
 		this.writeInt(itemStack.getCount());
 	}
 
-	@Shadow
-	public abstract ByteBuf writeInt(int i);
+
 
 	@ModifyArg (method = "readItemStack",
 			at = @At (value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;<init>(Lnet/minecraft/item/ItemConvertible;I)V"),
@@ -34,6 +38,5 @@ public abstract class DesyncFixin {
 		return this.readInt();
 	}
 
-	@Shadow
-	public abstract int readInt();
+
 }

@@ -49,31 +49,18 @@ publishing {
                 password(project.findProperty('maven_password'))
             }
         }
-    }
-}
 
-unifiedPublishing {
-    project {
-        gameVersions = [minecraft_version]
-        gameLoaders = ["fabric"]
-
-        mainPublication tasks.remapJar
-        //secondaryPublication tasks.remapSourcesJar
-
-        var cfToken = project.findProperty("cf_token")
-        if (cfToken != null) {
-            curseforge {
-                token = cfToken
-                id = "820136"
-            }
-        }
-
-        var mrToken = project.findProperty("mr_token")
-        if (mrToken != null) {
-            modrinth {
-                token = mrToken
-                id = "fauLGdJR"
+        /**
+         * Temp, only used for my uploads
+         */
+        maven {
+            name = "LemonLimeMaven"
+            url = "https://maven.lemonlime.tech/snapshots"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
             }
         }
     }
 }
+
